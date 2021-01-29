@@ -1,12 +1,13 @@
 exe=bc_game
 CXX = g++
 objects=build/main.o
+CXXFLAGS = --std=c++11
 
 exe: $(objects)
 	g++ $(objects) -o $(exe) -lpthread
 
 build/%.o: src/%.cpp
-	$(CXX)
+	$(CXX) -c $(CXXFLAGS) $^ -o $@
 
 clean:
 	rm $(exe) $(objects)
