@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include <vector>
 #include "operations.h"
 
 void CreateNumber(short int &num)
@@ -9,7 +10,7 @@ void CreateNumber(short int &num)
 	bool isValid = false;
 	while (!isValid) {
 		num = rand() % (9999-1023 + 1) + 1023;
-		std::vector digits = GetDigitsFromNumber(num);
+		std::vector<short int> digits = GetDigitsFromNumber(num);
 		std::cout << digits[0] << digits[1] << digits[2] << digits[3] << "\n";
 		if (digits[0] != digits[1] && digits[0] != digits[2] && digits[0] != digits[3] && digits[1] != digits[2] && digits[1] != digits[3] && digits[2] != digits[3] ) {
 			isValid = true;
@@ -17,10 +18,7 @@ void CreateNumber(short int &num)
 	}
 }
 
-std::vector<short int> TellAnswer(&num)
-{
-	std::vector<short int> answer;
-}
+
 std::vector<short int> GetDigitsFromNumber(short int &num)
 {
 	std::vector<short int> digits;
@@ -28,5 +26,24 @@ std::vector<short int> GetDigitsFromNumber(short int &num)
 	digits.push_back(num % 1000 / 100);
     digits.push_back(num % 100 / 10);
 	digits.push_back(num % 10);
-	return digits
+	return digits;
+}
+
+std::vector<short int> TellAnswer(short int user_num, short int comp_num)
+{
+	std::vector<short int> answer;
+	answer.push_back(0);
+	answer.push_back(0);
+	std::vector<short int> c_dig = GetDigitsFromNumber(comp_num);
+	std::vector<short int> u_dig = GetDigitsFromNumber(user_num);
+	for (int i = 0; i < 4; i++)
+	{
+		if (u_dig[i] == c_dig[i]) {
+			answer[0]++;
+			continue;
+		}
+		if (u_dig[i] == c_dig[0] || u_dig[i] == c_dig[1] || u_dig[i] == c_dig[2] || u_dig[i] == c_dig[3])
+			answer[1]++;
+	}
+	return answer;
 }

@@ -1,7 +1,7 @@
 exe=bc_game
 CXX = g++
 objects=build/main.o build/operations.o
-CXXFLAGS = --std=c++11
+CXXFLAGS = --std=c++17
 
 exe: $(objects)
 	g++ $(objects) -o $(exe) -lpthread

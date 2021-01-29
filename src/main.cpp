@@ -7,6 +7,9 @@ int main()
    	CreateNumber(computer_number);
 	std::cout << "generated num is: " << computer_number << "\n";
 	std::cout << "Make your guess:\n";
-	short int player_guess;
-	std::cin >> player_guess;
-}
+	short int player_number;
+	std::cin >> player_number;
+	short int test = computer_number;
+	std::vector<short int> answer = TellAnswer(player_number, test);
+	std::cout << "answer: " ;
+}	
