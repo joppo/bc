@@ -10,12 +10,16 @@ void CreateNumber(short int &num)
 	bool isValid = false;
 	while (!isValid) {
 		num = rand() % (9999-1023 + 1) + 1023;
-		std::vector<short int> digits = GetDigitsFromNumber(num);
-		std::cout << digits[0] << digits[1] << digits[2] << digits[3] << "\n";
-		if (digits[0] != digits[1] && digits[0] != digits[2] && digits[0] != digits[3] && digits[1] != digits[2] && digits[1] != digits[3] && digits[2] != digits[3] ) {
-			isValid = true;
-		}
+		isValid = IsNumberValid(num);
 	}
+}
+bool IsNumberValid(short int num)
+{
+	std::vector<short int> digits = GetDigitsFromNumber(num);
+	if (digits[0] != digits[1] && digits[0] != digits[2] && digits[0] != digits[3] && digits[1] != digits[2] && digits[1] != digits[3] && digits[2] != digits[3] )
+		return true;
+	else
+		return false;
 }
 
 
@@ -46,4 +50,16 @@ std::vector<short int> TellAnswer(short int user_num, short int comp_num)
 			answer[1]++;
 	}
 	return answer;
+}
+
+std::vector<short int> GenerateAllNumbers()
+{
+	short int num;
+	std::vector<short int> numbers;
+	for (int i = 1023; i <= 9876; i++)
+	{
+		if (IsNumberValid(i))
+			numbers.push_back(i);	
+	}
+	return numbers;	
 }
