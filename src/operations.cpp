@@ -6,7 +6,7 @@
 
 void CreateNumber(short int &num)
 {
-	//srand(time(NULL));
+	srand(time(NULL));
 	bool isValid = false;
 	while (!isValid) {
 		num = rand() % (9999-1023 + 1) + 1023;
@@ -63,3 +63,20 @@ std::vector<short int> GenerateAllNumbers()
 	}
 	return numbers;	
 }
+
+void UpdatePossibleNumers(short int &guess, short int &bulls, short int &cows, std::vector<short int> &all_nums)
+{
+	std::vector<short int> result;
+	for (int i = 0; i < all_nums.size(); i++)
+	{
+		//mock check
+		result = TellAnswer(guess, all_nums[i]);
+		if (result[0] != bulls || result[1] != cows)
+		{
+			all_nums.erase(all_nums.begin() + i);
+			i--;
+			continue;
+		}
+	}
+}
+
